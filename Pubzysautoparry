@@ -1,0 +1,95 @@
+-- Load Orion Library
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Orion/main/source'))()
+
+-- Create Window with Customized Design
+local Window = OrionLib:MakeWindow({
+    Name = "Publoader - Blade Ball",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "Pubzy_Configs",
+    IntroText = "Publoader",
+    Icon = "rbxassetid://7734050480",
+    CloseCallback = function() print("Window Closed") end
+})
+
+-- Create Main Tab
+local MainTab = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Button for Red Circle Auto Parry
+MainTab:AddButton({
+    Name = "Auto Parry",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/UltraStuff/scripts2/main/bladered"))()
+        warn("Red Circle Auto Parry Enabled")
+    end
+})
+
+-- Create Misc Tab for other settings
+local MiscTab = Window:MakeTab({
+    Name = "Misc",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- WalkSpeed Slider
+MiscTab:AddSlider({
+    Name = "WalkSpeed",
+    Min = 30, -- Default walk speed (normal walk speed)
+    Max = 100, -- Max walk speed
+    Default = 16, -- Starting walk speed
+    Color = Color3.fromRGB(255, 165, 0),
+    Increment = 1, -- Step between values
+    Callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+        warn("WalkSpeed set to: " .. value)
+    end
+})
+
+-- JumpPower Slider
+MiscTab:AddSlider({
+    Name = "JumpPower",
+    Min = 50, -- Default jump power
+    Max = 200, -- Max jump power
+    Default = 50, -- Starting jump power
+    Color = Color3.fromRGB(255, 165, 0),
+    Increment = 1, -- Step between values
+    Callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+        warn("JumpPower set to: " .. value)
+    end
+})
+
+-- FOV Slider
+MiscTab:AddSlider({
+    Name = "Field of View (FOV)",
+    Min = 70, -- Default FOV
+    Max = 120, -- Max FOV
+    Default = 70, -- Starting FOV
+    Color = Color3.fromRGB(255, 165, 0),
+    Increment = 1, -- Step between values
+    Callback = function(value)
+        game:GetService("Workspace").CurrentCamera.FieldOfView = value
+        warn("FOV set to: " .. value)
+    end
+})
+
+-- Gravity Slider
+MiscTab:AddSlider({
+    Name = "Gravity",
+    Min = 50, -- Default gravity
+    Max = 200, -- Max gravity
+    Default = 196.2, -- Default Roblox gravity
+    Color = Color3.fromRGB(255, 165, 0),
+    Increment = 1, -- Step between values
+    Callback = function(value)
+        game:GetService("Workspace").Gravity = value
+        warn("Gravity set to: " .. value)
+    end
+})
+
+-- Initialize Orion Library
+OrionLib:Init()
